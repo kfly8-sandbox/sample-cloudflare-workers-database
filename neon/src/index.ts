@@ -6,23 +6,6 @@ export default {
     const url = new URL(request.url);
 
     if (
-      request.method === 'POST' &&
-      url.pathname === '/api/setup'
-    ) {
-      await sql`DROP TABLE IF EXISTS todos`;
-      await sql`CREATE TABLE "todos" (
-              "id" SERIAL NOT NULL,
-              "title" TEXT NOT NULL,
-              "description" TEXT NOT NULL,
-              "done" BOOLEAN NOT NULL DEFAULT false,
-
-              CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
-          )`
-
-      return new Response('Table created', { status: 201 });
-    }
-
-    if (
       request.method === 'GET' &&
       url.pathname === '/api/todos'
     ) {
