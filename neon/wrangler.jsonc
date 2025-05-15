@@ -5,5 +5,11 @@
   "compatibility_date": "2025-05-15",
   "observability": {
     "enabled": true
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "sample_cloudflare_workers_database_neon_cache",
+      "id": "c17a28189c4341c99b0cd839329814ac"
+    }
+  ]
 }
