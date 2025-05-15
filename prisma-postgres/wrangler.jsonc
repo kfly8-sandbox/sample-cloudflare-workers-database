@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "sample-cloudflare-workers-prisma-postgres",
+	"name": "sample-cloudflare-workers-database-prisma-postgres",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-05-15",
 	"observability": {
