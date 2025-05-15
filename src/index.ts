@@ -11,27 +11,34 @@ export default {
 
     const url = new URL(request.url);
 
-    if (url.pathname === '/api/posts') {
-      const allPosts = await prisma.post.findMany({
-        where: { published: true },
+    if (
+      request.method === 'GET' &&
+      url.pathname === '/api/todos'
+    ) {
+      const todos = await prisma.todo.findMany({
         cacheStrategy: { ttl: 60 },
       });
 
-      return Response.json(allPosts);
+      return Response.json(todos);
     }
 
-    if (url.pathname === '/api/posts/create') {
-      await prisma.post.create({
-        data: {
-          content: 'Hello World',
-          title: 'Hello World',
-          published: true,
-          authorId: 5,
-        }
+    if (
+      request.method === 'POST' &&
+      url.pathname === '/api/todos'
+    ) {
+
+      const todo = {
+        title: 'Hello World',
+        description: 'This is a test',
+        done: false,
+      }
+
+      await prisma.todo.create({
+        data: todo
       })
-      return Response.json({ message: 'Post created' });
+      return Response.json(todo, { status: 201 });
     }
 
-    return new Response('Hello World!');
+    return new Response('Not Found', { status: 404 });
   },
 } satisfies ExportedHandler<Env>;
