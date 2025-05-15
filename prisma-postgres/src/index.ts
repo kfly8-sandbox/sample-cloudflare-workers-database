@@ -16,6 +16,17 @@ export default {
       url.pathname === '/api/todos'
     ) {
       const todos = await prisma.todo.findMany({
+        //cacheStrategy: { ttl: 60 },
+      });
+
+      return Response.json(todos);
+    }
+
+    if (
+      request.method === 'GET' &&
+      url.pathname === '/api/todos/with-cache'
+    ) {
+      const todos = await prisma.todo.findMany({
         cacheStrategy: { ttl: 60 },
       });
 
