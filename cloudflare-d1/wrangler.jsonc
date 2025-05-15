@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sample-cloudflare-workers-database-cloudflare-d1",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-05-15",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sample-cloudflare-workers-database-cloudflare-d1",
+      "database_id": "43f38535-db21-49f0-9dd1-ab953a0b43d3",
+      "migrations_dir" : "./drizzle"
+    }
+  ]
+}

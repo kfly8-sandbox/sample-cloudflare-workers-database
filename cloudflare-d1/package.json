@@ -1,0 +1,21 @@
+{
+  "name": "sample-cloudflare-workers-database-cloudflare-d1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "cf-typegen": "wrangler types"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.8.19",
+    "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
+    "typescript": "^5.5.2",
+    "wrangler": "^4.14.4"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.43.1"
+  }
+}

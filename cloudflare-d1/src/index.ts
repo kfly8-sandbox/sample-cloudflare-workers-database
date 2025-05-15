@@ -1,25 +1,17 @@
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate';
+import { drizzle } from 'drizzle-orm/d1';
+import { todos } from './schema';
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {
-
-    const prisma = new PrismaClient({
-      datasourceUrl: env.DATABASE_URL,
-    })
-    .$extends(withAccelerate());
-
+    const db = drizzle(env.DB)
     const url = new URL(request.url);
 
     if (
       request.method === 'GET' &&
       url.pathname === '/api/todos'
     ) {
-      const todos = await prisma.todo.findMany({
-        cacheStrategy: { ttl: 60 },
-      });
-
-      return Response.json(todos);
+      const rows = await db.select().from(todos).all();
+      return Response.json(rows);
     }
 
     if (
@@ -33,7 +25,7 @@ export default {
         done: false,
       }
 
-      await prisma.todo.create({ data: todo })
+      await db.insert(todos).values(todo).run();
       return Response.json(todo, { status: 201 });
     }
 
